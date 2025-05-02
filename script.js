@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let userAnswers = {};
     let isFullscreen = false;
     let quizStarted = false;
-    const quizPassword = "exam123"; // Default password for the quiz
+    const quizPassword = "laptop789"; // Default password for the quiz
 
     // Timer setup - 30 minutes
     let timeLeft = 3 * 60 * 60;  // 3 hours in seconds
