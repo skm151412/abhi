@@ -4,9 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const totalQuestions = questions.length;
     let currentQuestionIndex = 0;
     let userAnswers = {};
-    let isFullscreen = false;
     let quizStarted = false;
-    const quizPassword = "lskm789"; // Default password for the quiz
+    const quizPassword = "abhishek36"; // Default password for the quiz
 
     // Timer setup - 30 minutes
     let timeLeft = 3 * 60 * 60;  // 3 hours in seconds
@@ -134,7 +133,6 @@ document.addEventListener("DOMContentLoaded", function () {
             <h2>Quiz Prerequisites</h2>
             <p>Before starting the quiz, please ensure:</p>
             <ul>
-                <li id="fullscreen-check">✗ Quiz must be in fullscreen mode</li>
                 <li id="flightmode-check">✗ Device must be in flight/airplane mode</li>
             </ul>
             <div id="password-section" style="display: none;">
@@ -143,7 +141,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 <p id="password-feedback" style="color: red; display: none;">Incorrect password!</p>
             </div>
             <button id="startQuizBtn" disabled>Start Quiz</button>
-            <button id="fullscreenBtn">Enter Fullscreen</button>
             <p id="flightmode-instruction">Please enable flight/airplane mode on your device, then click below to confirm</p>
             <button id="checkFlightModeBtn">I've Enabled Flight Mode</button>
         </div>
@@ -153,19 +150,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.insertBefore(prerequisiteDiv, quizContainer);
     quizContainer.style.display = "none";
     document.querySelector(".heading").style.display = "none";
-
-    // Fullscreen functionality
-    document.getElementById("fullscreenBtn").addEventListener("click", function () {
-        if (document.documentElement.requestFullscreen) {
-            document.documentElement.requestFullscreen();
-        } else if (document.documentElement.mozRequestFullScreen) {
-            document.documentElement.mozRequestFullScreen();
-        } else if (document.documentElement.webkitRequestFullscreen) {
-            document.documentElement.webkitRequestFullscreen();
-        } else if (document.documentElement.msRequestFullscreen) {
-            document.documentElement.msRequestFullscreen();
-        }
-    });
 
     // Check flight mode button
     document.getElementById("checkFlightModeBtn").addEventListener("click", checkFlightMode);
@@ -186,34 +170,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Fullscreen change detection
-    document.addEventListener("fullscreenchange", updateFullscreenStatus);
-    document.addEventListener("webkitfullscreenchange", updateFullscreenStatus);
-    document.addEventListener("mozfullscreenchange", updateFullscreenStatus);
-    document.addEventListener("MSFullscreenChange", updateFullscreenStatus);
-
     // Network status detection
     window.addEventListener("online", checkQuizViolation);
-
-    function updateFullscreenStatus() {
-        isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement ||
-            document.mozFullScreenElement || document.msFullscreenElement);
-
-        const fullscreenCheck = document.getElementById("fullscreen-check");
-        if (isFullscreen) {
-            fullscreenCheck.innerHTML = "✓ Quiz is in fullscreen mode";
-            fullscreenCheck.style.color = "green";
-        } else {
-            fullscreenCheck.innerHTML = "✗ Quiz must be in fullscreen mode";
-            fullscreenCheck.style.color = "red";
-
-            if (quizStarted) {
-                checkQuizViolation();
-            }
-        }
-
-        updateStartButton();
-    }
 
     function checkFlightMode() {
         const isOffline = !navigator.onLine;
@@ -223,10 +181,8 @@ document.addEventListener("DOMContentLoaded", function () {
             flightmodeCheck.innerHTML = "✓ Device is in flight/airplane mode";
             flightmodeCheck.style.color = "green";
             
-            // Show password section when both conditions are met
-            if (isFullscreen) {
-                document.getElementById("password-section").style.display = "block";
-            }
+            // Show password section when flight mode is enabled
+            document.getElementById("password-section").style.display = "block";
         } else {
             flightmodeCheck.innerHTML = "✗ Device must be in flight/airplane mode";
             flightmodeCheck.style.color = "red";
@@ -239,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const startBtn = document.getElementById("startQuizBtn");
         const passwordSection = document.getElementById("password-section");
         
-        if (isFullscreen && !navigator.onLine) {
+        if (!navigator.onLine) {
             passwordSection.style.display = "block";
             startBtn.disabled = false;
         } else {
@@ -250,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function checkQuizViolation() {
         if (quizStarted) {
-            if (!isFullscreen || navigator.onLine) {
+            if (navigator.onLine) {
                 // Auto-submit quiz due to violation
                 submitQuiz(true);
             }
@@ -290,7 +246,13 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!resultDiv.style.display || resultDiv.style.display === "none") {
             prevBtn.style.display = index === 0 ? "none" : "inline-block";
             nextBtn.style.display = index === questions.length - 1 ? "none" : "inline-block";
-            submitBtn.style.display = "block"; // Always show submit button for all questions
+            
+            // Only show submit button on the last question
+            if (index === questions.length - 1) {
+                submitBtn.style.display = "block";
+            } else {
+                submitBtn.style.display = "none";
+            }
         } else {
             // After quiz submission, always show navigation
             prevBtn.style.display = "inline-block";
@@ -375,7 +337,7 @@ document.addEventListener("DOMContentLoaded", function () {
         quizStarted = false;
     }
 
-    // New function to show correct answers in each question
+    // Show correct answers in each question
     function showCorrectAnswers() {
         questions.forEach((question, index) => {
             const questionKey = `q${index + 1}`;
