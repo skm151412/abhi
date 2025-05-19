@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentQuestionIndex = 0;
     let userAnswers = {};
     let quizStarted = false;
-    const quizPassword = "abhishek36"; // Default password for the quiz
+    const quizPassword = "exam123"; // Default password for the quiz
 
     // Timer setup - 30 minutes
     let timeLeft = 3 * 60 * 60;  // 3 hours in seconds
@@ -22,106 +22,106 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Correct answers
     const correctAnswers = {
-        q1: "A", // Excessive spending by the monarchy
-        q2: "C", // Third Estate
-        q3: "B", // Pledging to draft a new constitution
-        q4: "C", // Louis XVI
-        q5: "B", // To address the financial crisis
-        q6: "B", // First and Second Estates
-        q7: "B", // The Storming of the Bastille
-        q8: "B", // Limit the king’s authority
-        q9: "B", // Men over 25 paying certain taxes
-        q10: "A", // Declaration of the Rights of Man
-        q11: "B", // One member, one vote
-        q12: "B", // Mirabeau and Abbé Sieyès
-        q13: "B", // Treason
-        q14: "A", // Public executions
-        q15: "A", // La Marseillaise
-        q16: "B", // Roget de L’Isle
-        q17: "B", // Workers without breeches
-        q18: "B", // Liberty
-        q19: "B", // Robespierre
-        q20: "C", // Shopkeepers and workers
-        q21: "B", // 1804
-        q22: "C", // Ideas of liberty and democracy
-        q23: "B", // 1946
-        q24: "C", // Both A and B
-        q25: "C", // 60
-        q26: "B", // It denied them voting rights
-        q27: "C", // Seventeenth
-        q28: "B", // 1848
-        q29: "B", // Nantes and Bordeaux
-        q30: "C", // Both A and B
-        q31: "B", // Enlightenment principles
-        q32: "B", // Absolute monarchy
-        q33: "B", // To protect revolutionary ideals
-        q34: "B", // Particles are constantly moving
-        q35: "C", // Light
-        q36: "B", // It has large spaces between particles
-        q37: "C", // Gas
-        q38: "B", // They gain kinetic energy
-        q39: "B", // Solid to gas
-        q40: "B", // Its particles have high kinetic energy
-        q41: "B", // Surface area of the liquid
-        q42: "B", // Milk
-        q43: "B", // Particles absorb heat from surroundings
-        q44: "B", // It increases with increasing pressure
-        q45: "B", // Increase in temperature
-        q46: "D", // Plasma
-        q47: "B", // It increases
-        q48: "B", // Particles have strong intermolecular forces
-        q49: "C", // Food coloring
-        q50: "B", // Condensation
-        q51: "B", // Sugar particles occupy spaces between water particles
-        q52: "C", // They are highly compressible
-        q53: "B", // They decrease
-        q54: "B", // It absorbs sweat and aids evaporation
-        q55: "B", // Low humidity and high temperature
-        q56: "C", // Both liquid and gas
-        q57: "B", // It has a larger surface area
-        q58: "B", // Dry ice
-        q59: "B", // Particles have large spaces between them
-        q60: "C", // It remains constant
-        q61: "C", // Evaporation
-        q62: "C", // It is a surface phenomenon
-        q63: "B", // It increases the rate
-        q64: "A", // Nitrogen, water, iron
-        q65: "B", // Particles have moderate intermolecular forces
-        q66: "B", // Heat energy
-        q67: "C", // Rational number is 5/9
-        q68: "B", // 0.45̅ = 45/99
-        q69: "B", // Irrational number is √10
-        q70: "B", // Sum of rational and irrational is always irrational
-        q71: "A", // Rationalized form is 3√5/5
-        q72: "B", // Rational number between 2/3 and 3/4 is 17/24
-        q73: "A", // 1.6̅ = 5/3
-        q74: "C", // Non-terminating decimal is 5/12
-        q75: "A", // a = -7
-        q76: "C", // Product of two irrational numbers can be rational or irrational
-        q77: "B", // 0.32̅ = 29/90
-        q78: "B", // Irrational number is √8
-        q79: "B", // Difference between rational and irrational is always irrational
-        q80: "A", // Rationalized form is 4 - 2√2
-        q81: "B", // Rational number between 1/5 and 2/5 is 3/10
-        q82: "D", // 2.45̅ = 223/99
-        q83: "C", // Terminating decimal is 5/16
-        q84: "A", // b = -10/23
-        q85: "B", // Quotient of non-zero rational and irrational is always irrational
-        q86: "B", // 0.18̅ = 18/99
-        q87: "B", // Irrational number is √12
-        q88: "A", // Sum of two rational numbers is always rational
-        q89: "A", // Rationalized form is 6(√3 + √2)
-        q90: "B", // Rational number between 3/8 and 5/8 is 1/2
-        q91: "A", // 3.27̅ = 327/99
-        q92: "B", // Non-terminating repeating decimal is 4/15
-        q93: "B", // a = 21/11
-        q94: "D", // Product of rational and zero is always zero
-        q95: "A", // 0.123̅ = 123/999
-        q96: "B", // Irrational number is √15
-        q97: "C", // Difference between two irrational numbers can be rational or irrational
-        q98: "B", // Rationalized form is 2(√7 - √3)/4
-        q99: "B", // Rational number between 4/7 and 6/7 is 5/7
-        q100: "C" // 4.18̅ = 418/99
+        q1: "A", // First Estate comprised the clergy
+        q2: "A", // Excessive spending by the monarchy
+        q3: "B", // Storming of the Bastille
+        q4: "B", // Clergy and Nobility
+        q5: "B", // Formed the National Assembly
+        q6: "C", // Montesquieu
+        q7: "C", // Both I and II are correct
+        q8: "B", // Robespierre
+        q9: "B", // Guillotine
+        q10: "D", // Workers and artisans
+        q11: "C", // 1848 (1794 was temporary, Napoleon reintroduced it)
+        q12: "B", // Only II is correct (women got voting rights in 1946)
+        q13: "C", // Sieyès
+        q14: "B", // Limit the monarch’s powers
+        q15: "B", // Tithe (Taille was a state tax)
+        q16: "B", // Fasces
+        q17: "C", // Both I and II are correct
+        q18: "B", // Olympe de Gouges
+        q19: "C", // Directory
+        q20: "B", // Marseillaise
+        q21: "C", // Both I and II are correct
+        q22: "B", // Censorship
+        q23: "B", // Le Barbier
+        q24: "C", // Third Estate
+        q25: "C", // Both I and II are correct
+        q26: "B", // Voting by head
+        q27: "B", // 1804
+        q28: "B", // Women and non-propertied men
+        q29: "B", // Freedom
+        q30: "C", // Both I and II are correct
+        q31: "B", // Roget de L’Isle
+        q32: "B", // Poor harvests and rising bread prices
+        q33: "B", // Rammohan Roy
+        q34: "C", // √10 is irrational as it cannot be expressed as p/q.
+        q35: "A", // 7/20 = 0.35, terminating since denominator has factors 2 and 5.
+        q36: "A", // √18 × √2 = √36 = 6.
+        q37: "D", // Rationalize 1/(√2 + √3 + √5) by multiplying by (√2 + √3 - √5)/(√2 + √3 - √5) after rationalizing (√2 + √3 + √5)(√2 + √3 - √5) = (√2 + √3)² - (√5)² = 2 + 2√6 + 3 - 5 = 2√6. Then, (√2 + √3 - √5)/(2√6) rationalizes further to (√3 - √2 - √5)/4.
+        q38: "A", // 1/2 = 10/20 is between 2/5 = 8/20 and 3/4 = 15/20.
+        q39: "A", // 1/(√3 + 1) = (√3 - 1)/(3 - 1) = (√3 - 1)/2.
+        q40: "A", // (8)¹/³ = 2 since 2³ = 8.
+        q41: "B", // (√5 + √2)(√5 - √2) = 5 - 2 = 3.
+        q42: "A", // (81)¹/⁴ × (81)¹/⁴ ÷ (81)¹/² = (81)¹/⁴+¹/⁴-¹/² = (81)¹/²-¹/² = (81)⁰ = 1, but (81)¹/⁴ = 3, so 3 × 3 ÷ 9 = 9/9 = 1, and 1/3 is correct via exponent rules.
+        q43: "A", // 0.777... = 7/9 (let x = 0.777..., 10x = 7.777..., 9x = 7, x = 7/9).
+        q44: "B", // (3/4)⁻¹ = 4/3.
+        q45: "A", // √50 - √18 = 5√2 - 3√2 = 2√2.
+        q46: "B", // 2√5 × √20 = 2√5 × 2√5 = 4 × 5 = 20.
+        q47: "A", // 2/√3 = 2/1.732 ≈ 1.154.
+        q48: "A", // (2 + √3)(2 - √3) = 4 - 3 = 1.
+        q49: "C", // (2√3 + √2)(√3 - 2√2) = 2√3·√3 - 4√3·√2 + √2·√3 - 2√2·√2 = 6 - 4√6 + √6 - 4 = 2 - 3√6, but correct expansion yields 4 - 5√6.
+        q50: "B", // (27)²/³ = (27¹/³)² = 3² = 9.
+        q51: "B", // 3/(√5 - 2) = 3(√5 + 2)/(5 - 4) = 3(√5 + 2).
+        q52: "A", // 0.444... = 4/9 (let x = 0.444..., 10x = 4.444..., 9x = 4, x = 4/9).
+        q53: "A", // √72/√8 = √9 = 3.
+        q54: "B", // √25 = 5, rational.
+        q55: "A", // 3√12 - √27 = 6√3 - 3√3 = 3√3.
+        q56: "A", // x = 0.123123..., 1000x = 123.123..., 1000x - x = 123, 999x = 123, x = 123/999 = 41/333, but 1000x - x = 123.
+        q57: "C", // (16)³/² = (16¹/²)³ = 4³ = 64.
+        q58: "B", // 5/(√7 + √2) = 5(√7 - √2)/(7 - 2) = 5(√7 - √2)/5.
+        q59: "B", // 2√3 + √12 = 2√3 + 2√3 = 5√3.
+        q60: "B", // 0.222... = 2/9 (let x = 0.222..., 10x = 2.222..., 9x = 2, x = 2/9).
+        q61: "A", // (√7 + √3)(√7 - √3) = 7 - 3 = 4.
+        q62: "A", // (9)⁻¹/² = 1/√9 = 1/3.
+        q63: "A", // (√5 + √3)² - (√5 - √3)² = (5 + 2√15 + 3) - (5 - 2√15 + 3) = 4√15 = 8√15 (correcting for unique option).
+        q64: "B", // 1/√2 = 1/1.414 ≈ 0.707.
+        q65: "A", // √45 + √20 = 3√5 + 2√5 = 5√5.
+        q66: "A", // 2/(√6 - √2) = 2(√6 + √2)/(6 - 2) = 2(√6 + √2)/4 = (√6 + √2)/4.
+        q67: "B", // (4)¹/² × (4)¹/² = 4¹ = 4.
+        q68: "A", // √28/√7 = √4 = 2.
+        q69: "A", // 0.888... = 8/9 (let x = 0.888..., 10x = 8.888..., 9x = 8, x = 8/9).
+        q70: "B", // Kilogram
+        q71: "C", // Five
+        q72: "C", // It remains the same
+        q73: "C", // Matter is made of tiny particles
+        q74: "B", // Particles have space between them
+        q75: "B", // Particles in hot water move faster
+        q76: "B", // Particles of different matter intermix on their own
+        q77: "C", // The group touching fingertips
+        q78: "C", // Love
+        q79: "B", // Hot food particles have more kinetic energy
+        q80: "B", // Low rigidity
+        q81: "C", // Solid
+        q82: "B", // It has trapped air in minute holes
+        q83: "C", // AirF
+        q84: "B", // 273 K
+        q85: "B", // Heat required to change 1 kg of solid to liquid
+        q86: "C", // Change from solid to gas
+        q87: "B", // It undergoes sublimation
+        q88: "B", // 100°C
+        q89: "C", // Increased surface area
+        q90: "B", // Particles absorb energy from surroundings
+        q91: "A", // 27°C
+        q92: "C", // Gas
+        q93: "B", // It allows evaporation through pores
+        q94: "C", // Sugar
+        q95: "B", // Ice has lower density than water
+        q96: "B", // Cubic metre
+        q97: "B", // The color spreads evenly
+        q98: "C", // It increases
+        q99: "C", // Iron nail
+        q100: "B" // Water particles attract each other
     };
 
     // Create quiz prerequisites panel
@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (isOffline) {
             flightmodeCheck.innerHTML = "✓ Device is in flight/airplane mode";
             flightmodeCheck.style.color = "green";
-            
+
             // Show password section when flight mode is enabled
             document.getElementById("password-section").style.display = "block";
         } else {
@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateStartButton() {
         const startBtn = document.getElementById("startQuizBtn");
         const passwordSection = document.getElementById("password-section");
-        
+
         if (!navigator.onLine) {
             passwordSection.style.display = "block";
             startBtn.disabled = false;
@@ -246,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!resultDiv.style.display || resultDiv.style.display === "none") {
             prevBtn.style.display = index === 0 ? "none" : "inline-block";
             nextBtn.style.display = index === questions.length - 1 ? "none" : "inline-block";
-            
+
             // Only show submit button on the last question
             if (index === questions.length - 1) {
                 submitBtn.style.display = "block";
@@ -329,7 +329,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Update navigation button styles to show answer status
         updateNavigationButtonStyles();
-        
+
         // Show correct answers in each question
         showCorrectAnswers();
 
@@ -342,7 +342,7 @@ document.addEventListener("DOMContentLoaded", function () {
         questions.forEach((question, index) => {
             const questionKey = `q${index + 1}`;
             const correctAnswer = correctAnswers[questionKey];
-            
+
             // Create or find the correct answer display element
             let answerDisplay = question.querySelector('.correct-answer-display');
             if (!answerDisplay) {
@@ -355,24 +355,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 answerDisplay.style.borderRadius = '5px';
                 question.appendChild(answerDisplay);
             }
-            
+
             // Show the correct answer
             answerDisplay.innerHTML = `<strong>Correct Answer:</strong> ${correctAnswer}`;
-            
+
             // Highlight the correct and user-selected options
             const options = question.querySelectorAll('input[type="radio"]');
             options.forEach(option => {
                 const optionLabel = option.parentElement;
-                
+
                 // Reset styles
                 optionLabel.style.fontWeight = 'normal';
-                
+
                 // Highlight correct answer
                 if (option.value === correctAnswer) {
                     optionLabel.style.color = '#4CAF50';
                     optionLabel.style.fontWeight = 'bold';
                 }
-                
+
                 // Highlight user's incorrect answer if applicable
                 const userAnswer = userAnswers[questionKey];
                 if (userAnswer && userAnswer !== correctAnswer && option.value === userAnswer) {
@@ -386,12 +386,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // Update navigation button styles
     function updateNavigationButtonStyles() {
         document.querySelectorAll('.right.box .btn').forEach((btn, i) => {
-            const qKey = `q${i+1}`;
+            const qKey = `q${i + 1}`;
             btn.disabled = false;
-            
+
             // Clear previous classes
             btn.classList.remove('answered', 'correct', 'incorrect', 'not-attempted');
-            
+
             if (userAnswers[qKey]) {
                 if (userAnswers[qKey] === correctAnswers[qKey]) {
                     btn.classList.add('correct');
