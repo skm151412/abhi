@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentQuestionIndex = 0;
     let userAnswers = {};
     let quizStarted = false;
-    const quizPassword = "test125"; // Default password for the quiz
+    const quizPassword = "ghar1234"; // Default password for the quiz
+    const authorPassword = "thar4567"; // New password for the author to show answers
 
     // Timer setup - 30 minutes
     let timeLeft = 3 * 60 * 60;  // 3 hours in seconds
@@ -122,7 +123,11 @@ document.addEventListener("DOMContentLoaded", function () {
         q98: "C", // It increases
         q99: "C", // Iron nail
         q100: "B" // Water particles attract each other
+        
     };
+
+    // Show answers control flag
+    let showAnswersEnabled = false;
 
     // Create quiz prerequisites panel
     const quizContainer = document.querySelector(".container");
@@ -308,9 +313,39 @@ document.addEventListener("DOMContentLoaded", function () {
             ${timeExpired ? '<p>Time Expired!</p>' : ''}
             ${violation ? '<p>Quiz rules violated! Quiz auto-submitted.</p>' : ''}
             <p>You can now navigate through the questions to see the correct answers.</p>
+            <div id="author-controls" style="margin-top: 20px; padding: 10px; border: 1px dashed #ccc; background-color: #f9f9f9;">
+                <p><strong>Author Controls:</strong></p>
+                <input type="password" id="author-password" placeholder="Author Password">
+                <button id="toggle-answers-btn">Show Answers</button>
+                <p id="author-feedback" style="color: red; display: none;">Incorrect author password!</p>
+            </div>
         `;
 
         resultDiv.style.display = "block";
+
+        // Set up the toggle answers button
+        document.getElementById("toggle-answers-btn").addEventListener("click", function() {
+            const authorPasswordInput = document.getElementById("author-password");
+            const authorFeedback = document.getElementById("author-feedback");
+            
+            if (authorPasswordInput.value === authorPassword) {
+                showAnswersEnabled = !showAnswersEnabled;
+                this.textContent = showAnswersEnabled ? "Hide Answers" : "Show Answers";
+                authorFeedback.style.display = "none";
+                
+                if (showAnswersEnabled) {
+                    showCorrectAnswers();
+                } else {
+                    hideCorrectAnswers();
+                }
+                
+                // Update navigation button styles
+                updateNavigationButtonStyles();
+            } else {
+                authorFeedback.style.display = "block";
+                authorPasswordInput.value = "";
+            }
+        });
 
         // Disable all inputs but keep navigation enabled
         document.querySelectorAll("input[type=radio]").forEach(input => {
@@ -330,8 +365,10 @@ document.addEventListener("DOMContentLoaded", function () {
         // Update navigation button styles to show answer status
         updateNavigationButtonStyles();
 
-        // Show correct answers in each question
-        showCorrectAnswers();
+        // Only show correct answers if enabled
+        if (showAnswersEnabled) {
+            showCorrectAnswers();
+        }
 
         // End quiz state
         quizStarted = false;
@@ -358,6 +395,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Show the correct answer
             answerDisplay.innerHTML = `<strong>Correct Answer:</strong> ${correctAnswer}`;
+            answerDisplay.style.display = 'block';
 
             // Highlight the correct and user-selected options
             const options = question.querySelectorAll('input[type="radio"]');
@@ -383,6 +421,25 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Hide correct answers
+    function hideCorrectAnswers() {
+        questions.forEach((question) => {
+            // Hide correct answer display
+            const answerDisplay = question.querySelector('.correct-answer-display');
+            if (answerDisplay) {
+                answerDisplay.style.display = 'none';
+            }
+
+            // Reset option styles
+            const options = question.querySelectorAll('input[type="radio"]');
+            options.forEach(option => {
+                const optionLabel = option.parentElement;
+                optionLabel.style.color = '';
+                optionLabel.style.fontWeight = 'normal';
+            });
+        });
+    }
+
     // Update navigation button styles
     function updateNavigationButtonStyles() {
         document.querySelectorAll('.right.box .btn').forEach((btn, i) => {
@@ -392,14 +449,22 @@ document.addEventListener("DOMContentLoaded", function () {
             // Clear previous classes
             btn.classList.remove('answered', 'correct', 'incorrect', 'not-attempted');
 
-            if (userAnswers[qKey]) {
-                if (userAnswers[qKey] === correctAnswers[qKey]) {
-                    btn.classList.add('correct');
+            // If answers are enabled, show correct/incorrect status
+            if (showAnswersEnabled) {
+                if (userAnswers[qKey]) {
+                    if (userAnswers[qKey] === correctAnswers[qKey]) {
+                        btn.classList.add('correct');
+                    } else {
+                        btn.classList.add('incorrect');
+                    }
                 } else {
-                    btn.classList.add('incorrect');
+                    btn.classList.add('not-attempted');
                 }
             } else {
-                btn.classList.add('not-attempted');
+                // If answers are disabled, just show which ones were answered
+                if (userAnswers[qKey]) {
+                    btn.classList.add('answered');
+                }
             }
         });
 
@@ -420,6 +485,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             .right.box .btn.active {
                 border: 3px solid #2196F3;
+            }
+            .right.box .btn.answered {
+                background-color: #2196F3;
+                color: white;
             }
         `;
         document.head.appendChild(styleEl);
